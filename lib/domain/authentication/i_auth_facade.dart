@@ -5,10 +5,10 @@ import 'package:weather_app/domain/authentication/user.dart';
 import 'auth_failure.dart';
 
 abstract class IAuthFacade {
-  Either<AuthFailure, User> loginWithGithub(
+  Future<Either<AuthFailure, User>> loginWithGithub(
       {@required String email, @required String password});
 
-  User loginAsAnonymous();
+  Future<User> loginAsAnonymous();
 
-  void logout();
+  Future logout();
 }

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/domain/authentication/anonymous_user.dart';
 import 'package:weather_app/presentations/navigator/bottom_navigator.dart';
-import 'package:weather_app/presentations/screens/home_screen.dart';
 import 'package:weather_app/presentations/screens/login_screen.dart';
 import 'package:weather_app/presentations/screens/welcome_screen.dart';
 
@@ -26,25 +25,29 @@ class MyApp extends StatelessWidget {
       initialRoute: ScreenRouterConstants.LOGIN,
       getPages: [
         GetPage(
-            name: ScreenRouterConstants.LOGIN,
-            page: () {
-              final authService = Get.find<AuthService>();
-              final user = authService.getUser();
-              if (user == null) {
-                return LoginScreen();
-              }
+          name: ScreenRouterConstants.LOGIN,
+          page: () {
+            final authService = Get.find<AuthService>();
+            final user = authService.getUser();
 
-              if (user is AnonymousUser) {
-                return WelcomeScreen();
-              }
-              return BottomNavigator();
-            }),
+            if (user == null) {
+              return LoginScreen();
+            }
+
+            if (user is AnonymousUser) {
+              return WelcomeScreen();
+            }
+            return BottomNavigator();
+          },
+        ),
         GetPage(
-            name: ScreenRouterConstants.WELCOME_SCREEN,
-            page: () => WelcomeScreen()),
+          name: ScreenRouterConstants.WELCOME_SCREEN,
+          page: () => WelcomeScreen(),
+        ),
         GetPage(
-            name: ScreenRouterConstants.BOTTOM_NAVIGATOR,
-            page: () => BottomNavigator()),
+          name: ScreenRouterConstants.BOTTOM_NAVIGATOR,
+          page: () => BottomNavigator(),
+        ),
       ],
       debugShowCheckedModeBanner: false,
     );
